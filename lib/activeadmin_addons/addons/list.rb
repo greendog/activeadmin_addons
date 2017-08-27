@@ -5,7 +5,7 @@ class ListBuilder < ActiveAdminAddons::CustomBuilder
 
     return if data.nil?
 
-    raise 'invalid list type (ul, ol)' unless [:ul, :ol].include?(options[:list_type])
+    raise "invalid list type (ul, ol)" unless [:ul, :ol].include?(options[:list_type])
     raise "list must be Array or Hash" if !data.is_a?(Hash) && !data.is_a?(Array)
 
     @level = []

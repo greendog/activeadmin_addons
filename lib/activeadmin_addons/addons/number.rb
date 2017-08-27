@@ -12,9 +12,11 @@ module ActiveAdminAddons
 
     def render
       options[:as] = options.fetch(:as, :delimiter)
+
       if !NUMBER_TYPES.keys.include?(options[:as])
         raise "Invalid number type. Options are: #{NUMBER_TYPES.keys}"
       end
+
       context.send(NUMBER_TYPES[options[:as]], data, options)
     end
   end

@@ -14,7 +14,7 @@ module ActiveAdminAddons
     end
 
     def for_ext(file_extension)
-      ext = file_extension.start_with?('.') ? file_extension[1..-1] : file_extension
+      ext = file_extension.start_with?(".") ? file_extension[1..-1] : file_extension
       ext.downcase!
       ext = "unknown" unless KNOWN_EXTENSIONS.include?(ext)
       "fileicons/file_extension_#{ext}.png"
@@ -33,19 +33,19 @@ module ActiveAdminAddons
     end
 
     def label_text
-      label =
-        if options[:label].nil?
-          file.original_filename
-        elsif options[:label].is_a? Proc
-          options[:label].call(model).to_s
-        else
-          options[:label].to_s
-        end
+      label = if options[:label].nil?
+                file.original_filename
+              elsif options[:label].is_a? Proc
+                options[:label].call(model).to_s
+              else
+                options[:label].to_s
+              end
+
       options[:truncate] ? context.truncate(label) : label
     end
 
     def render
-      raise 'you need to pass a paperclip attribute' unless file.respond_to?(:url)
+      raise "you need to pass a paperclip attribute" unless file.respond_to?(:url)
       options[:truncate] = options.fetch(:truncate, true)
       return nil unless file.exists?
       context.link_to(build_label, file.url, target: "_blank", class: "attachment-link")
